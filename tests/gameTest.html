@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game API Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .glow {
+            text-shadow: 0 0 15px #00f7ff, 0 0 30px #0066ff;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #00f7ff, #0066ff);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 247, 255, 0.1);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.1);
+        }
+
+        .input-group {
+            margin: 1rem 0;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            color: #00f7ff;
+            padding: 0.8rem;
+            border-radius: 5px;
+            flex: 1;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(0, 247, 255, 0.3);
+        }
+
+        button {
+            background: linear-gradient(45deg, #00f7ff, #0066ff);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            color: #002233;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+        }
+
+        #response {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 2rem;
+            white-space: pre-wrap;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+            z-index: 1000;
+        }
+
+        .success {
+            background: linear-gradient(45deg, #00ff88, #006644);
+            border: 1px solid #00ff88;
+        }
+
+        .error {
+            background: linear-gradient(45deg, #ff0066, #660022);
+            border: 1px solid #ff0066;
+        }
+
+        .background-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(0, 102, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 102, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-grid"></div>
+    <div class="container">
+        <h1 class="glow">GAME API TEST CONSOLE</h1>
+
+        <div class="section">
+            <h2>➕ Add Game</h2>
+            <div class="input-group">
+                <input type="number" id="addId" placeholder="Game ID">
+                <input type="text" id="player1" placeholder="Player 1">
+                <input type="text" id="player2" placeholder="Player 2">
+            </div>
+            <button onclick="addGame()">Create Game</button>
+        </div>
+
+        <div class="section">
+            <h2>🔍 Get Game</h2>
+            <div class="input-group">
+                <input type="number" id="getId" placeholder="Game ID">
+            </div>
+            <button onclick="getGame()">Fetch Game</button>
+        </div>
+
+        <div class="section">
+            <h2>🔄 Update Game</h2>
+            <div class="input-group">
+                <input type="number" id="updateId" placeholder="Game ID">
+                <input type="text" id="updatePlayer1" placeholder="New Player 1">
+                <input type="text" id="updatePlayer2" placeholder="New Player 2">
+                <input type="text" id="updateWinner" placeholder="New Winner">
+                <input type="number" id="updateNext" placeholder="New Next">
+            </div>
+            <button onclick="updateGame()">Update Game</button>
+        </div>
+
+        <div class="section">
+            <h2>🗑️ Delete Game</h2>
+            <div class="input-group">
+                <input type="number" id="deleteId" placeholder="Game ID">
+            </div>
+            <button onclick="deleteGame()">Delete Game</button>
+        </div>
+
+        <div class="section">
+            <h2>🔄 Reset Game</h2>
+            <div class="input-group">
+                <input type="number" id="resetId" placeholder="Game ID">
+            </div>
+            <button onclick="resetGame()">Reset Game</button>
+        </div>
+
+        <div id="response"></div>
+    </div>
+
+    <script>
+        const baseUrl = 'http://localhost:3000/gamesApi';
+        
+        function displayResponse(data) {
+            const responseDiv = document.getElementById('response');
+            responseDiv.textContent = JSON.stringify(data, null, 2);
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        async function handleRequest(url, options) {
+            try {
+                const response = await fetch(url, options);
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.error);
+                }
+                const data = await response.json();
+                showNotification('Operation successful!', 'success');
+                displayResponse(data);
+            } catch (error) {
+                showNotification(`Error: ${error.message}`, 'error');
+                displayResponse({ error: error.message });
+            }
+        }
+
+        function addGame() {
+            const gameData = {
+                id: parseInt(document.getElementById('addId').value),
+                player1: document.getElementById('player1').value,
+                player2: document.getElementById('player2').value
+            };
+
+            handleRequest(`${baseUrl}/add`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(gameData)
+            });
+        }
+
+        function getGame() {
+            const gameId = document.getElementById('getId').value;
+            handleRequest(`${baseUrl}/${gameId}`, { method: 'GET' });
+        }
+
+        function updateGame() {
+            const gameId = document.getElementById('updateId').value;
+            const updateData = {
+                player1: document.getElementById('updatePlayer1').value,
+                player2: document.getElementById('updatePlayer2').value,
+                winner: document.getElementById('updateWinner').value,
+                next: parseInt(document.getElementById('updateNext').value)
+            };
+
+            Object.keys(updateData).forEach(key => {
+                if (updateData[key] === '') delete updateData[key];
+            });
+
+            handleRequest(`${baseUrl}/update/${gameId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updateData)
+            });
+        }
+
+        function deleteGame() {
+            const gameId = document.getElementById('deleteId').value;
+            handleRequest(`${baseUrl}/delete/${gameId}`, { method: 'DELETE' });
+        }
+
+        function resetGame() {
+            const gameId = document.getElementById('resetId').value;
+            handleRequest(`${baseUrl}/reset/${gameId}`, { method: 'PUT' });
+        }
+    </script>
+</body>
+</html>
