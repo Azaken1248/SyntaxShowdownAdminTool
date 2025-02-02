@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syntax Showdown - Code Combat Arena</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .glow {
+            text-shadow: 0 0 15px #00f7ff, 0 0 30px #0066ff;
+            animation: glowPulse 2s infinite alternate;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .title {
+            font-size: 4.5rem;
+            letter-spacing: 0.2rem;
+            background: linear-gradient(45deg, #00f7ff, #0066ff);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3.5rem;
+                letter-spacing: 0.15rem;
+                margin-bottom: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2.5rem;
+                letter-spacing: 0.1rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        
+
+        .tagline {
+            font-size: 1.5rem;
+            color: #88aaff;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #00f7ff, #0066ff);
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            color: #002233;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #00f7ff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 5rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 247, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.2);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00f7ff, #0066ff);
+            z-index: -1;
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.3;
+        }
+
+        @keyframes glowPulse {
+            from {
+                text-shadow: 0 0 10px #00f7ff, 0 0 20px #0066ff;
+            }
+            to {
+                text-shadow: 0 0 20px #00f7ff, 0 0 40px #0066ff;
+            }
+        }
+
+        .background-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(0, 102, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 102, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-grid"></div>
+    <div class="container">
+        <header>
+            <h1 class="title glow">SYNTAX SHOWDOWN</h1>
+            <p class="tagline">Where Code Meets Combat</p>
+            <button class="cta-button" onclick="window.location.href = 'https\://www.google.co.in'">Enter the Arena</button>
+        </header>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>⚔️ Live Battles</h3>
+                <p>Real-time coding challenges against opponents worldwide</p>
+            </div>
+            <div class="feature-card">
+                <h3>🏆 Tournaments</h3>
+                <p>Compete in weekly tournaments for glory and prizes</p>
+            </div>
+            <div class="feature-card">
+                <h3>💻 Multi-Language</h3>
+                <p>Support for Python, JavaScript, C++ and more</p>
+            </div>
+            <div class="feature-card">
+                <h3>📈 Skill Ranking</h3>
+                <p>Climb the leaderboards and prove your mastery</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
