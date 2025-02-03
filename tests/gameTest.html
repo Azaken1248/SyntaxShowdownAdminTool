@@ -155,7 +155,7 @@
         <div class="section">
             <h2>➕ Add Game</h2>
             <div class="input-group">
-                <input type="number" id="addId" placeholder="Game ID">
+                <input type="text" id="addId" placeholder="Game ID">
                 <input type="text" id="player1" placeholder="Player 1">
                 <input type="text" id="player2" placeholder="Player 2">
             </div>
@@ -165,7 +165,7 @@
         <div class="section">
             <h2>🔍 Get Game</h2>
             <div class="input-group">
-                <input type="number" id="getId" placeholder="Game ID">
+                <input type="text" id="getId" placeholder="Game ID">
             </div>
             <button onclick="getGame()">Fetch Game</button>
         </div>
@@ -173,11 +173,11 @@
         <div class="section">
             <h2>🔄 Update Game</h2>
             <div class="input-group">
-                <input type="number" id="updateId" placeholder="Game ID">
+                <input type="text" id="updateId" placeholder="Game ID">
                 <input type="text" id="updatePlayer1" placeholder="New Player 1">
                 <input type="text" id="updatePlayer2" placeholder="New Player 2">
                 <input type="text" id="updateWinner" placeholder="New Winner">
-                <input type="number" id="updateNext" placeholder="New Next">
+                <input type="text" id="updateNext" placeholder="New Next">
             </div>
             <button onclick="updateGame()">Update Game</button>
         </div>
@@ -185,7 +185,7 @@
         <div class="section">
             <h2>🗑️ Delete Game</h2>
             <div class="input-group">
-                <input type="number" id="deleteId" placeholder="Game ID">
+                <input type="text" id="deleteId" placeholder="Game ID">
             </div>
             <button onclick="deleteGame()">Delete Game</button>
         </div>
@@ -193,7 +193,7 @@
         <div class="section">
             <h2>🔄 Reset Game</h2>
             <div class="input-group">
-                <input type="number" id="resetId" placeholder="Game ID">
+                <input type="text" id="resetId" placeholder="Game ID">
             </div>
             <button onclick="resetGame()">Reset Game</button>
         </div>
@@ -238,7 +238,7 @@
 
         function addGame() {
             const gameData = {
-                id: parseInt(document.getElementById('addId').value),
+                id: document.getElementById('addId').value,
                 player1: document.getElementById('player1').value,
                 player2: document.getElementById('player2').value
             };
@@ -261,7 +261,7 @@
                 player1: document.getElementById('updatePlayer1').value,
                 player2: document.getElementById('updatePlayer2').value,
                 winner: document.getElementById('updateWinner').value,
-                next: parseInt(document.getElementById('updateNext').value)
+                next: document.getElementById('updateNext').value
             };
 
             Object.keys(updateData).forEach(key => {
