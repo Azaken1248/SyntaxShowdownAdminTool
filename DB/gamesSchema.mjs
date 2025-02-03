@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const gamesSchema = new mongoose.Schema({
     id: {
-        type: Number,
+        type: String,
         required: true
     },
     player1: {
@@ -18,8 +18,8 @@ const gamesSchema = new mongoose.Schema({
         default: "Ongoing"
     },
     next: {
-        type: Number,
-        default: -1
+        type: String,
+        default: "na"
     }
 
 });
